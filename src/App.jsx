@@ -10,17 +10,17 @@ export default function App() {
 
     // selalu di render setiap ada perubahan
     useEffect(() => {
-        console.log('selalu di render!!!')
+        // console.log('selalu di render!!!')
     })
 
     // di render atau di panggil hanya di saat pertama saja
     useEffect(() => {
-        console.log('first render')
+        // console.log('first render')
     }, [])
 
     //ada perubahan jika di Trigger/ Picu
     useEffect(() => {
-        console.log(`I am now ${online ? 'online' : 'offline'}`)
+        // console.log(`I am now ${online ? 'online' : 'offline'}`)
     }, [online])
 
     function updateScrollPosition() {
@@ -30,8 +30,12 @@ export default function App() {
     }
     // componenWillUnmount | apa yang akan dilakuakn kalau mau di render 
     useEffect(() => {
+        console.log('Attaching')
         window.addEventListener('scroll', updateScrollPosition)
-        // return () => {}
+        return () => {
+            console.log('Dettaching');
+            window.removeEventListener('scroll', updateScrollPosition)
+        }
     })
 
     return (
