@@ -1,26 +1,23 @@
 import PlaceContentCenter from './components/PlaceContentCenter'
-import Card from './components/Card'
-import Button from './components/Button'
-import { useRef } from 'react'
+import { useEffect, useState } from 'react'
 import Input from './components/Input'
 
 export default function App() {
-    const inputRef = useRef(null)
+    const [name, setName] = useState('')
 
-    function handleClick() {
-        inputRef.current.focus()
-    }
+    // selalu di render setiap ada perubahan
+    useEffect(() => {
+        console.log('selalu di render!!!')
+    })
+
+    // di render atau di panggil hanya di saat pertama saja
+    useEffect(() => {
+        console.log('first render')
+    },[])
 
     return (
         <PlaceContentCenter>
-            <Card>
-                <Card.Tittle>useRef Hook</Card.Tittle>
-                <Card.Body>
-                    <Input isFocused placeholder={'Email'} className={'border border-slate-400'}></Input>
-                    <Input placeholder={'Password'} className={'border border-slate-400'}></Input>
-                    <Button onClick={handleClick}>Tick</Button>
-                </Card.Body>
-            </Card>
+            <Input value={name} onChange={(e) => setName(e.target.value)}></Input>
         </PlaceContentCenter>
     )
 }
