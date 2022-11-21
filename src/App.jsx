@@ -23,20 +23,25 @@ export default function App() {
         // console.log(`I am now ${online ? 'online' : 'offline'}`)
     }, [online])
 
+    // componenWillUnmount | apa yang akan dilakuakn kalau mau di render 
     function updateScrollPosition() {
         const windowScrolling = window.scrollY
         console.log(`window scroll position: ${windowScrolling}`)
         setScrollPosition(windowScrolling)
     }
-    // componenWillUnmount | apa yang akan dilakuakn kalau mau di render 
+    // function onKeyDown(e) {
+
+    // }
     useEffect(() => {
-        console.log('Attaching')
         window.addEventListener('scroll', updateScrollPosition)
-        return () => {
-            console.log('Dettaching');
-            window.removeEventListener('scroll', updateScrollPosition)
-        }
-    })
+        // window.addEventListener('keydown', function (e) {
+        //     console.log(e.code)
+        // })
+        // window.addEventListener('keydown', onKeyDown)
+        // return () => {
+        //     window.removeEventListener('keydown', onKeyDown)
+        // }
+    },[])
 
     return (
         <div className={'h-[4000px]'}>
