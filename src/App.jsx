@@ -28,7 +28,7 @@ export default function App() {
         console.log(`window scroll position: ${windowScrolling}`)
         setScrollPosition(windowScrolling)
     }
-    // componenWillUnmount | apa yang akan dilakuakn kalau mau di render
+    // componenWillUnmount | apa yang akan dilakuakn kalau mau di render 
     useEffect(() => {
         window.addEventListener('scroll', updateScrollPosition)
         // return () => {}
