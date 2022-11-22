@@ -1,57 +1,32 @@
 import PlaceContentCenter from './components/PlaceContentCenter'
 import Card from './components/Card'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
+import Input from './components/Input'
+import useNoris from './hooks/useNoris'
+import { useState } from 'react'
+import { useRef } from 'react'
+import Button from './components/Button'
 
 export default function App() {
-    const [users, setUsers] = useState([])
-    const [loading, setLoading] = useState(false)
+    const nameRef = useRef()
+    const [name, setName] = useState('Ion')
+    //this is hook | memiliki aturan menggunakan nama awalan 'use' baru nama
+    const noris = useNoris(name)
 
-    useEffect(() => {
-        async function getUsers() {
-            setLoading(true)
-            try {
-                // by default await axios get('link')
-                const { data } = await axios('http://jsonplaceholder.typicode.com/users')
-                setUsers(data)
-                setLoading(false)
-            } catch (error) {
-                console.log(error.message)
-                setLoading(false)
-            }
-        }
-        // then(r => r) untuk membersihkan
-        getUsers().then((r) => r)
-    }, [])
-
+    const generateNoris = (e) => {
+        e.preventDefault()
+        setName(nameRef.current.value)
+    }
     return (
         <PlaceContentCenter>
             <Card>
-                <Card.Tittle>Users: {users.length}</Card.Tittle>
+                <Card.Tittle>Huglaa Noris</Card.Tittle>
                 <Card.Body>
-                    {loading ? (
-                        <div>Loading....</div>
-                    ) : (
-                        <ol>
-                            {users.map((user) => (
-                                <li key={user.id}>
-                                    {user.name} ({user.username})
-                                </li>
-                            ))}
-                        </ol>
-                    )}
-                    {/* {users.length ? (
-                        <ol>
-                            {users.map((user) => (
-                                <li key={user.id}>
-                                    {user.name} ({user.username})
-                                </li>
-                            ))}
-                        </ol>
-                    ) : (
-                        <div> Tidak ada User</div>
-                    )} */}
+                    <p className={'mb-4'}>{noris.value}</p>
+                    <Input ref={nameRef} />
                 </Card.Body>
+                <Card.Footer>
+                    <Button onClick={generateNoris}> Enter</Button>
+                </Card.Footer>
             </Card>
         </PlaceContentCenter>
     )
