@@ -11,7 +11,7 @@ export default function App() {
     const [name, setName] = useState('Ion')
     //this is hook | memiliki aturan menggunakan nama awalan 'use' baru nama
     const noris = useNoris(name)
-
+    console.log(console.log(first))
     const generateNoris = (e) => {
         e.preventDefault()
         setName(nameRef.current.value)
